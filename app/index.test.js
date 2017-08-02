@@ -1,22 +1,17 @@
 'use strict'
 
 const test = require('tape')
-const supertest = require('supertest')
-
+const request = require('supertest')
 const app = require('./index.js')
-
-const server = app.listen()
-const request = supertest(server)
+const getServer = (app) => app.listen().close()
 
 test('Access home page will display Hello World string', t => {
-  request
+  request(getServer(app))
     .get('/')
     .expect(200)
     .end((err, res) => {
-      if (err) throw err
+      t.ifError(err)
       t.equals(res.text, 'Hello World')
       t.end()
     })
 })
-
-server.close()
