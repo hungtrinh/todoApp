@@ -5,7 +5,7 @@ const request = require('supertest')
 const app = require('./index.js')
 const getServer = (app) => app.listen().close()
 
-test('Access home page will display Hello World string', t => {
+test('2Access home page will display Hello World string', t => {
   request(getServer(app))
     .get('/')
     .expect(200)

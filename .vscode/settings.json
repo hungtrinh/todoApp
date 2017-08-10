@@ -1,0 +1,7 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+    "workbench.colorTheme": "Visual Studio Dark",
+    "editor.renderWhitespace": "all",
+    "editor.tabSize": 2,
+    "typescript.check.tscVersion": false
+}

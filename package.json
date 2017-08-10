@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "standard && tape app/**/*.test.js | faucet",
-    "unittest": "tape app/**/*.test.js | faucet",
+    "test": "standard && tape app/**/*.test.js",
+    "unittest": "tape app/**/*.test.js",
     "fix": "standard --fix app/**",
     "start": "pm2-dev index.js"
   },
@@ -13,14 +13,13 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "faucet": "0.0.1",
     "standard": "^10.0.2",
     "supertest": "^3.0.0",
-    "tape": "4.7.0",
-    "tape-promise": "2.0.1"
+    "tape": "4.7.0"
   },
   "dependencies": {
     "koa": "^2.3.0",
+    "koa-bodyparser": "^4.2.0",
     "koa-router": "^7.2.1",
     "pm2": "^2.6.1"
   }

@@ -1,6 +1,6 @@
 'use strict'
 
-const test = require('tape-promise/tape')
+const test = require('tape')
 
 const Task = require('./task')
 
