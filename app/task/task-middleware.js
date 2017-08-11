@@ -1,5 +1,7 @@
 
-module.exports = createTaskMiddleware
+module.exports = {
+  createTaskMiddleware
+}
 
 function createTaskMiddleware (ctx, next) {
   const taskDesc = ctx.request.body.task

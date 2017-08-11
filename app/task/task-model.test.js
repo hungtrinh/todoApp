@@ -2,7 +2,7 @@
 
 const test = require('tape')
 
-const Task = require('./task')
+const Task = require('./task-model')
 
 test('create a task with task notation', assert => {
   const task = Task.create({description: 'an toi voi me'})

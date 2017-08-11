@@ -1,9 +1,9 @@
 'use strict'
 
-const createMiddleware = require('./create- middleware')
+const {createTaskMiddleware} = require('./task-middleware')
 
 module.exports = initTaskModule
 
 function initTaskModule (router) {
-  router.post('/task', createMiddleware)
+  router.post('/task', createTaskMiddleware)
 }
