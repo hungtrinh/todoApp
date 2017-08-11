@@ -5,16 +5,12 @@ const Router = require('koa-router')
 const bodyParser = require('koa-bodyparser')
 
 const app = new Koa()
-const router = new Router()
+const apiRouter = new Router()
 
-require('./task').init(router)
+require('./task').init(apiRouter)
 
-router.get('/', (ctx, next) => {
-  ctx.body = 'Hello World'
-})
+app.use(bodyParser())
+  .use(apiRouter.routes())
+  .use(apiRouter.allowedMethods())
 
-app
-.use(bodyParser())
-.use(router.routes())
-.use(router.allowedMethods())
 module.exports = app
