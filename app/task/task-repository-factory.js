@@ -2,7 +2,7 @@
 
 const assert = require('assert')
 
-module.exports = function ({db} = {}) {
+module.exports = ({db} = {}) => {
   assert(db, 'opts.db is required')
   return {
   }

@@ -11,7 +11,7 @@
  *
  * @return {object} {description, createdAt, updatedAt, completed}
  */
-exports.create = (task) => {
+exports = module.exports = (task) => {
   const today = Date.now()
   const {
     description,
