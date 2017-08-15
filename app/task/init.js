@@ -1,7 +1,7 @@
 'use strict'
 
-const {createTaskMiddlewareFactory} = require('./task-middleware-factory')
-const container = {get: x => x}
+const {createTaskMiddlewareFactory} = require('./create-task-middleware-factory')
+const taskRepository = {create: taskDesc => ({id: 1, description: taskDesc})}
 module.exports = (router) => {
-  router.post('/task', createTaskMiddlewareFactory(container))
+  router.post('/task', createTaskMiddlewareFactory(taskRepository))
 }

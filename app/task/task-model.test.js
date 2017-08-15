@@ -2,10 +2,10 @@
 
 const test = require('tape')
 
-const Task = require('./task-model-factory')
+const TaskModelFactory = require('./task-model-factory')
 
 test('create a task with task notation', assert => {
-  const task = Task.create({description: 'an toi voi me'})
+  const task = TaskModelFactory.create({description: 'an toi voi me'})
 
   assert.equals(task.description, 'an toi voi me')
   assert.equals(task.createdAt, task.updatedAt)
@@ -14,7 +14,7 @@ test('create a task with task notation', assert => {
 })
 
 test('create with task description only ', assert => {
-  const task = Task.create('an toi voi me')
+  const task = TaskModelFactory.create('an toi voi me')
 
   assert.equals(task.description, 'an toi voi me')
   assert.equals(task.createdAt, task.updatedAt)
@@ -23,7 +23,7 @@ test('create with task description only ', assert => {
 })
 
 test('create a task, task is immutable', assert => {
-  const task = Task.create('an toi voi me')
+  const task = TaskModelFactory.create('an toi voi me')
   const today = Date.now()
 
   assert.throws(() => { task.description = 'do something' })
