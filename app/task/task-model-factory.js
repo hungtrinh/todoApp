@@ -28,6 +28,9 @@ function taskModelFactory (task) {
   updatedAt = updatedAt || today
   completed = completed || false
 
+  if (updatedAt < createdAt) {
+    throw new Error("task is completed before don't try do this task again")
+  }
   return Object.freeze({
     description: description,
     createdAt: createdAt,

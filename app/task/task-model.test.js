@@ -33,6 +33,18 @@ test('create a task, task is immutable', t => {
   t.end()
 })
 
+test('create task failed when updatedAt < createdAt', t => {
+  const createdDate = new Date(1995, 11, 17)
+  const updatedDate = new Date(1995, 10, 17)
+
+  t.throws(() => taskModelFactory({
+    description: 'vo van',
+    createdAt: createdDate,
+    updatedAt: updatedDate
+  }), 'needed createdAt alway >= updatedAt')
+  t.end()
+})
+
 test('task.done() success will clone origin task with completed status', t => {
   const createdDate = new Date()
 
