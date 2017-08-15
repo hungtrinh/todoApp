@@ -24,7 +24,6 @@ test('POST /task with task field then return status code 201', t => {
     id: 1,
     description: taskDesc
   }
-
   request(server)
     .post('/task')
     .send(postData)
