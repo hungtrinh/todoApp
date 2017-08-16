@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "watch": "watch 'clear && npm run -s test' app",
+    "watch:test": "watch 'clear && npm run -s test' app -du",
     "test": "standard && tape app/**/*.test.js | tap-spec",
-    "unittest": "tape app/**/*.test.js",
+    "test:unit": "tape app/**/*.test.js | tap-spec",
     "fix": "standard --fix app/**",
     "start": "pm2-dev index.js"
   },

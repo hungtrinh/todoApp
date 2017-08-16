@@ -4,6 +4,11 @@ const test = require('tape')
 
 const taskModelFactory = require('./task-model-factory')
 
+test('create a task with non param will raise error', t => {
+  t.throws(taskModelFactory, /Cannot match against 'undefined' or 'null'/)
+  t.end()
+})
+
 test('create a task with task notation', t => {
   const task = taskModelFactory({description: 'an toi voi me'})
 
@@ -80,6 +85,6 @@ test('task.done() will raise exception when task is completed before', t => {
     description: 'an toi voi me',
     completed: true
   })
-  t.throws(_ => task.done(), "task is completed before don't try do this task again")
+  t.throws(task.done, /task is completed before don't try do this task again/)
   t.end()
 })
