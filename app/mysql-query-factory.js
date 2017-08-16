@@ -1,8 +1,9 @@
 'use strict'
 
 const mysql = require('mysql')
-const config = require('./index.js')
 const assert = require('assert')
+
+const config = require('../config')
 
 module.exports = mysqlQueryFactory
 
