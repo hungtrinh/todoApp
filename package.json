@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "watch:test": "watch 'clear && npm run -s test' app -du",
-    "test": "NODE_ENV=test PORT=3001 standard && tape app/**/*.test.js | tap-spec",
-    "test:unit": "NODE_ENV=test PORT=3001 tape app/**/*.test.js | tap-spec",
+    "test": "NODE_ENV=test PORT=3001 standard && tape app/**/*.{unit,e2e}.js | tap-spec",
     "fix": "standard --fix app/**",
     "start": "NODE_ENV=development PORT=3000 pm2-dev index.js"
   },
@@ -27,6 +26,7 @@
     "koa": "^2.3.0",
     "koa-bodyparser": "^4.2.0",
     "koa-router": "^7.2.1",
+    "mysql": "^2.14.1",
     "pm2": "^2.6.1"
   }
 }

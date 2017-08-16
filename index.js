@@ -1,6 +1,5 @@
 const app = require('./app')
-const appConfig = require('./config')
-const {port} = appConfig.server
+const {server: {port}} = require('./config')
 const factoryServer = (app, port) => app.listen(port)
 
 factoryServer(app, port)

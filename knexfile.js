@@ -1,22 +1,33 @@
 'use strict'
 
 const appConfig = require('./config')
-const {env, db} = appConfig
+const {db: {
+  username,
+  password,
+  name,
+  host,
+  port,
+  connectionLimit
+}} = appConfig
+
+const connectionByEnv = {
+  host: host,
+  database: name,
+  user: username,
+  password: password,
+  port: port
+}
+const poolByEnv = {
+  min: 2,
+  max: connectionLimit
+}
 
 module.exports = {
 
   development: {
     client: 'mysql',
-    connection: {
-      host: 'localhost',
-      database: 'my_db',
-      user: 'username',
-      password: 'password'
-    },
-    pool: {
-      min: 2,
-      max: 10
-    },
+    connection: connectionByEnv,
+    pool: poolByEnv,
     migrations: {
       tableName: 'knex_migrations'
     }
@@ -24,15 +35,8 @@ module.exports = {
 
   test: {
     client: 'mysql',
-    connection: {
-      database: 'my_db',
-      user: 'username',
-      password: 'password'
-    },
-    pool: {
-      min: 2,
-      max: 10
-    },
+    connection: connectionByEnv,
+    pool: poolByEnv,
     migrations: {
       tableName: 'knex_migrations'
     }
@@ -40,15 +44,8 @@ module.exports = {
 
   production: {
     client: 'mysql',
-    connection: {
-      database: 'my_db',
-      user: 'username',
-      password: 'password'
-    },
-    pool: {
-      min: 2,
-      max: 10
-    },
+    connection: connectionByEnv,
+    pool: poolByEnv,
     migrations: {
       tableName: 'knex_migrations'
     }
