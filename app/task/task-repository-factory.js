@@ -13,5 +13,6 @@ module.exports = ({db, taskModelFactory} = {}) => {
   assert(db, 'opts.db is required')
   assert(taskModelFactory, 'opts.taskModelFactory is required')
   return {
+    create: taskDesc => ({id: 1, description: taskDesc})
   }
 }

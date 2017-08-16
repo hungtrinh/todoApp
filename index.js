@@ -1,5 +1,6 @@
 const app = require('./app')
-const port = process.env.PORT || 3000
+const appConfig = require('./config')
+const {port} = appConfig.server
 const factoryServer = (app, port) => app.listen(port)
 
 factoryServer(app, port)
