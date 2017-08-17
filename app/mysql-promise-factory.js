@@ -63,14 +63,14 @@ function mysqlQueryFactory ({
    * @returns {Promise}
    */
   function query (sql = '', connecting = getConnection()) {
-    return connecting.then(
-      connection => new Promise((resolve, reject) => {
-        connection.query(sql, (error, results, fields) => {
-          connection.release()
-          if (error) reject(error)
-          resolve(results)
-        })
-      })
-    )
+    const doQuery = connection => new Promise((resolve, reject) => {
+      connection.query(sql, promisingQueryResult)
+      function promisingQueryResult (error, results, fields) {
+        connection.release()
+        if (error) reject(error)
+        resolve(results)
+      }
+    })
+    return connecting.then(doQuery)
   }// query
 }

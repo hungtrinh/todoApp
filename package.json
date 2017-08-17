@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "watch:test": "watch 'clear && npm run -s test' app -du",
-    "test": "NODE_ENV=test PORT=3001 standard && tape app/**/*.{unit,e2e}.js | tap-spec",
+    "test": "NODE_ENV=test PORT=3001 standard && tape app/**/*.{unittest,dbtest}.js | tap-spec",
     "fix": "standard --fix app/**",
     "start": "NODE_ENV=development PORT=3000 pm2-dev index.js"
   },
