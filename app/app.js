@@ -1,16 +1,12 @@
 'use strict'
 
-const Koa = require('koa')
-const Router = require('koa-router')
-const bodyParser = require('koa-bodyparser')
-
-const app = new Koa()
-const apiRouter = new Router()
-
-require('./task').init(apiRouter)
+const container = require('../config/container')
+const app = container.app
+const bodyParser = container.bodyParser
+const nonSecureRoutes = container.nonSecureRoutes
 
 app.use(bodyParser())
-  .use(apiRouter.routes())
-  .use(apiRouter.allowedMethods())
+  .use(nonSecureRoutes.routes())
+  .use(nonSecureRoutes.allowedMethods())
 
 module.exports = app

@@ -1,17 +1,22 @@
 'use strict'
 
 const path = require('path')
+
 const test = require('tape')
+const td = require('testdouble')
 const request = require('supertest')
-const appPath = path.resolve(__dirname, '../app')
-const app = require(appPath)
-const server = app.listen().close()
+
+const serverOnline = _ => {
+  const appPath = path.resolve(__dirname, '../app')
+  const app = require(appPath)
+  return app.listen().close()
+}
 
 test('POST /task with empty data then receive status code 400 with notice message', t => {
   const expectedHttpCode = 400
   const expectedBodyMessage = 'description \'task\' required'
 
-  request(server)
+  request(serverOnline())
     .post('/task')
     .expect(expectedHttpCode, expectedBodyMessage, t.end)
 })
@@ -24,7 +29,8 @@ test('POST /task with task field then return status code 201', t => {
     id: 1,
     description: taskDesc
   }
-  request(server)
+
+  request(serverOnline())
     .post('/task')
     .send(postData)
     .expect('Content-Type', /json/)

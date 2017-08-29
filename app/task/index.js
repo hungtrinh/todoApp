@@ -1,5 +1,5 @@
 'use strict'
 
 module.exports = {
-  init: require('./init.js')
+  routes: require('./init.js')
 }
