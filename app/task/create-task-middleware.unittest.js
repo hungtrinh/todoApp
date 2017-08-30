@@ -3,8 +3,14 @@
 const path = require('path')
 
 const test = require('tape')
-const td = require('testdouble')
 const request = require('supertest')
+// const Koa = require('koa')
+// const td = require('testdouble')
+// const bodyParser = require('koa-bodyparser')
+
+// const createTaskMiddlewareFactory = require('./create-task-middleware-factory')
+// const taskRepositoryFactory = require('./task-repository-factory')
+// const taskModelFactory = require('./task-model-factory')
 
 const serverOnline = _ => {
   const appPath = path.resolve(__dirname, '../app')

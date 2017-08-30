@@ -1,11 +1,9 @@
 'use strict'
 
-const taskModelFactory = require('./task-model-factory')
-const taskRepositoryFactory = require('./task-repository-factory')
-const createTaskMiddlewareFactory = require('./create-task-middleware-factory')
-const db = {}
-const taskRepository = taskRepositoryFactory({taskModelFactory, db})
-const createTaskMiddleware = createTaskMiddlewareFactory(taskRepository)
+const path = require('path')
+
+const container = require(path.resolve(__dirname, '../../config/container'))
+const createTaskMiddleware = container.createTaskMiddleware
 
 /**
  * Init task module
