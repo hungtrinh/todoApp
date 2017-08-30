@@ -4,28 +4,15 @@ const path = require('path')
 
 const test = require('tape')
 const request = require('supertest')
-// const Koa = require('koa')
-// const td = require('testdouble')
-// const bodyParser = require('koa-bodyparser')
+const td = require('testdouble')
 
-// const createTaskMiddlewareFactory = require('./create-task-middleware-factory')
-// const taskRepositoryFactory = require('./task-repository-factory')
-// const taskModelFactory = require('./task-model-factory')
+const container = require(path.resolve(__dirname, '../../config/container'))
 
 const serverOnline = _ => {
   const appPath = path.resolve(__dirname, '../app')
   const app = require(appPath)
   return app.listen().close()
 }
-
-test('POST /task with empty data then receive status code 400 with notice message', t => {
-  const expectedHttpCode = 400
-  const expectedBodyMessage = 'description \'task\' required'
-
-  request(serverOnline())
-    .post('/task')
-    .expect(expectedHttpCode, expectedBodyMessage, t.end)
-})
 
 test('POST /task with task field then return status code 201', t => {
   const taskDesc = 'lam viec de'
@@ -35,10 +22,33 @@ test('POST /task with task field then return status code 201', t => {
     id: 1,
     description: taskDesc
   }
+  const stubTaskReposnitory = {
+    create (task) {
+      return {
+        id: 1,
+        description: task
+      }
+    }
+  }
+  td.replace(container, 'taskRepository', stubTaskReposnitory)
 
   request(serverOnline())
     .post('/task')
     .send(postData)
     .expect('Content-Type', /json/)
-    .expect(expectedCreatedCode, expectedTask, t.end)
+    .expect(expectedCreatedCode, expectedTask)
+    .then(resp => {
+      td.reset()
+      t.end()
+    })
+    .catch(console.log)
+})
+
+test('POST /task with empty data then receive status code 400 with notice message', t => {
+  const expectedHttpCode = 400
+  const expectedBodyMessage = 'description \'task\' required'
+
+  request(serverOnline())
+    .post('/task')
+    .expect(expectedHttpCode, expectedBodyMessage, t.end)
 })
