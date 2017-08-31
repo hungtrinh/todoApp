@@ -24,7 +24,6 @@ function taskModelFactory (task) {
     completed
   } = (typeof task === 'string') ? {description: task} : task
 
-  description = description || ''
   createdAt = createdAt || today
   updatedAt = updatedAt || today
   completed = completed || false

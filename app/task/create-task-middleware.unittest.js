@@ -6,8 +6,10 @@ const test = require('tape')
 const request = require('supertest')
 const Koa = require('koa')
 const bodyParser = require('koa-bodyparser')
-const td = require('testdouble')
 
+const stubTaskReposnitory = {
+  create: task => ({id: 1, description: task})
+}
 const serverOnline = stubTaskReposnitory => {
   const createTaskMiddlewareFactory = require(path.resolve(__dirname, './create-task-middleware-factory'))
   const app = new Koa()
@@ -20,14 +22,7 @@ const serverOnline = stubTaskReposnitory => {
 test('POST /task with empty data then receive status code 400 with notice message', t => {
   const expectedHttpCode = 400
   const expectedBodyMessage = 'description \'task\' required'
-  const stubTaskReposnitory = {
-    create (task) {
-      return {
-        id: 1,
-        description: task
-      }
-    }
-  }
+
   request(serverOnline(stubTaskReposnitory))
     .post('/task')
     .expect(expectedHttpCode, expectedBodyMessage, t.end)
@@ -41,22 +36,9 @@ test('POST /task with task field then return status code 201', t => {
     id: 1,
     description: taskDesc
   }
-  const stubTaskReposnitory = {
-    create (task) {
-      return {
-        id: 1,
-        description: task
-      }
-    }
-  }
   request(serverOnline(stubTaskReposnitory))
     .post('/task')
     .send(postData)
     .expect('Content-Type', /json/)
-    .expect(expectedCreatedCode, expectedTask)
-    .then(resp => {
-      td.reset()
-      t.end()
-    })
-    .catch(console.log)
+    .expect(expectedCreatedCode, expectedTask, t.end)
 })
