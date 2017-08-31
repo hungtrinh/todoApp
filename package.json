@@ -10,7 +10,8 @@
     "test:watch": "watch 'clear && npm run -s test' app -du",
     "test:cover": "NODE_ENV=test PORT=0 istanbul cover tape app/**/*.{unittest,dbtest}.js",
     "fix": "standard --fix app/**",
-    "start": "NODE_ENV=development PORT=3000 pm2-dev index.js"
+    "start": "NODE_ENV=development PORT=3000 pm2-dev index.js",
+    "pull": "git pull -r && npm run i && npm test"
   },
   "keywords": [],
   "author": "",
