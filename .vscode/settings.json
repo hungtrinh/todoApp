@@ -2,6 +2,5 @@
 {
     "workbench.colorTheme": "Visual Studio Dark",
     "editor.renderWhitespace": "all",
-    "editor.tabSize": 2,
-    "typescript.check.tscVersion": false
+    "editor.tabSize": 2
 }

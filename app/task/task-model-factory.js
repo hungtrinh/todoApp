@@ -18,6 +18,7 @@ exports = module.exports = taskModelFactory
 function taskModelFactory (task) {
   const today = new Date()
   let {
+    id,
     description,
     createdAt,
     updatedAt,
@@ -31,11 +32,12 @@ function taskModelFactory (task) {
   assert(updatedAt >= createdAt, "task is completed before don't try do this task again")
 
   return Object.freeze({
-    description: description,
-    createdAt: createdAt,
-    updatedAt: updatedAt,
-    completed: completed,
-    done: done
+    id,
+    description,
+    createdAt,
+    updatedAt,
+    completed,
+    done
   })
 
   /**
@@ -48,6 +50,7 @@ function taskModelFactory (task) {
   function done () {
     assert(!completed, "task is completed before don't try do this task again")
     return taskModelFactory({
+      id,
       description,
       createdAt,
       updatedAt: new Date(),

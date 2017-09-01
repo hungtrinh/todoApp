@@ -2,52 +2,28 @@
 
 const appConfig = require('./config')
 const {db: {
-  username,
+  username: user,
   password,
-  name,
+  name: database,
   host,
   port,
-  connectionLimit
+  connectionLimit: max
 }} = appConfig
 
-const connectionByEnv = {
-  host: host,
-  database: name,
-  user: username,
-  password: password,
-  port: port
-}
-const poolByEnv = {
-  min: 2,
-  max: connectionLimit
-}
-
 module.exports = {
-
-  development: {
-    client: 'mysql',
-    connection: connectionByEnv,
-    pool: poolByEnv,
-    migrations: {
-      tableName: 'knex_migrations'
-    }
+  client: 'mysql',
+  connection: process.env.DATABASE_URL || {
+    host,
+    database,
+    user,
+    password,
+    port: port
   },
-
-  test: {
-    client: 'mysql',
-    connection: connectionByEnv,
-    pool: poolByEnv,
-    migrations: {
-      tableName: 'knex_migrations'
-    }
-  },
-
-  production: {
-    client: 'mysql',
-    connection: connectionByEnv,
-    pool: poolByEnv,
-    migrations: {
-      tableName: 'knex_migrations'
-    }
+  // pool: {
+  //   min: 1,
+  //   max: max
+  // },
+  migrations: {
+    tableName: 'knex_migrations'
   }
 }

@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test PORT=3001 standard && tape app/**/*.{unittest,dbtest}.js | tap-spec",
+    "migrate": "NODE_ENV=test PORT=0 DB_UERNAME=todo_test DB_PASSWORD=todo_test DB_NAME=todo_test DB_HOST=localhost DB_PORT=3306 knex migrate:latest",
+    "test": "NODE_ENV=test PORT=0 standard && tape app/**/*.unittest.js | tap-spec",
+    "test:db": "NODE_ENV=test PORT=0 DB_UERNAME=todo_test DB_PASSWORD=todo_test DB_NAME=todo_test DB_HOST=localhost DB_PORT=3306 DB_CONNECTION_LIMIT=1 tape app/**/*.dbtest.js | tap-spec",
     "test:watch": "watch 'clear && npm run -s test' app -du",
     "test:cover": "NODE_ENV=test PORT=0 istanbul cover tape app/**/*.{unittest,dbtest}.js",
     "fix": "standard --fix app/**",
@@ -16,10 +18,12 @@
   "devDependencies": {
     "dotenv": "^4.0.0",
     "istanbul": "0.4.5",
+    "leaked-handles": "5.2.0",
     "standard": "^10.0.2",
     "supertest": "^3.0.0",
     "tap-spec": "^4.1.1",
     "tape": "4.7.0",
+    "tape-async": "2.3.0",
     "testdouble": "^3.2.4",
     "watch": "^1.0.2"
   },
