@@ -1,6 +1,12 @@
 'use strict'
 
 const assert = require('assert')
+const path = require('path')
+
+const knex = require('knex')
+
+const knexConfigFilePath = path.resolve(__dirname, '../../knexfile')
+const knexConfigDefault = require(knexConfigFilePath)
 
 /**
  * Factory create a taskRepository
@@ -9,7 +15,10 @@ const assert = require('assert')
  * @property {Function} opts.taskModelFactory
  * @returns {object}
  */
-module.exports = ({db, taskModelFactory} = {}) => {
+module.exports = ({
+  db = knex(knexConfigDefault),
+  taskModelFactory = require('./task-model-factory')
+} = {}) => {
   assert(db, 'opts.db is required')
   assert(taskModelFactory, 'opts.taskModelFactory is required')
 

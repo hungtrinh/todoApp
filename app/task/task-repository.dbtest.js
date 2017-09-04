@@ -7,9 +7,8 @@ const test = require('tape-async')
 const setup = () => {
   const container = require(path.resolve(__dirname, '../../config/container'))
   const db = container.dbFactory()
-  const taskModelFactory = require('./task-model-factory')
   const taskRepositoryFactory = require('./task-repository-factory')
-  const taskRepository = taskRepositoryFactory({db, taskModelFactory})
+  const taskRepository = taskRepositoryFactory({db})
   return {
     db,
     taskRepository
