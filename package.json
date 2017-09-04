@@ -11,7 +11,7 @@
     "test:cover": "NODE_ENV=test PORT=0 istanbul cover tape app/**/*.{unittest,dbtest}.js",
     "fix": "standard --fix app/**",
     "start": "NODE_ENV=development PORT=3000 pm2-dev index.js",
-    "pull": "git pull && npm i && npm run test"
+    "pull": "git pull -r && npm i && npm run test"
   },
   "keywords": [],
   "author": "",
