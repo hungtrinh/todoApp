@@ -19,10 +19,10 @@ module.exports = {
     password,
     port: port
   },
-  // pool: {
-  //   min: 1,
-  //   max: max
-  // },
+  pool: {
+    min: 1,
+    max: max
+  },
   migrations: {
     tableName: 'knex_migrations'
   }

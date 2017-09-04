@@ -13,11 +13,13 @@ require('leaked-handles').set({
   debugSockets: true // pretty print tcp thrown exceptions.
 })
 
-test('taskRepository.add("task desc") will return promise<task>"', async t => {
-  const taskDesc = 'lam bai tap di'
-
+test('Recreate database', async t => {
   await db.migrate.rollback()
   await db.migrate.latest()
+})
+
+test('taskRepository.add("task desc") will return promise<task>"', async t => {
+  const taskDesc = 'lam bai tap di'
   const task = await taskRepository.add(taskDesc)
 
   t.equals(task.id, 1)
@@ -25,4 +27,9 @@ test('taskRepository.add("task desc") will return promise<task>"', async t => {
   t.equals(task.createdAt, task.updatedAt)
   t.notOk(task.completed)
   db.destroy(t.end)
+})
+
+test('Close database connection', async t => {
+  await db.destroy()
+  t.end()
 })

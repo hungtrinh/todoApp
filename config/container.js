@@ -7,6 +7,7 @@ const bodyParser = require('koa-bodyparser')
 const knex = require('knex')
 
 let taskRepository
+let db
 
 /**
  * dependencies container define
@@ -39,9 +40,12 @@ const deps = {
     taskRepository = taskRepo
   },
   get db () {
-    const knexfilePath = path.resolve(__dirname, '../knexfile')
-    const knextConfig = require(knexfilePath)
-    return knex(knextConfig)
+    if (!db) {
+      const knexfilePath = path.resolve(__dirname, '../knexfile')
+      const knextConfig = require(knexfilePath)
+      db = knex(knextConfig)
+    }
+    return db
   }
 }
 
