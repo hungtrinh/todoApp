@@ -5,6 +5,7 @@ const Koa = require('koa')
 const Router = require('koa-router')
 const bodyParser = require('koa-bodyparser')
 const knex = require('knex')
+const knexFileConfigDefault = path.resolve(__dirname, '../knexfile')
 
 let taskRepository
 let db
@@ -41,12 +42,25 @@ const deps = {
   },
   get db () {
     if (!db) {
-      const knexfilePath = path.resolve(__dirname, '../knexfile')
-      const knextConfig = require(knexfilePath)
-      db = knex(knextConfig)
+      db = dbFactory()
     }
     return db
-  }
+  },
+  set db (knexInstance) {
+    db = knexInstance
+  },
+  dbFactory: dbFactory
+}
+
+/**
+ * Create database connection instance
+ *
+ * @param {string} knexfilePath
+ * @return {Knex} an instance of Knex object
+ */
+function dbFactory (knexfilePath = knexFileConfigDefault) {
+  const knextConfig = require(knexfilePath)
+  return knex(knextConfig)
 }
 
 module.exports = deps
