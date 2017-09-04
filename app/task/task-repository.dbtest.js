@@ -38,9 +38,15 @@ test('taskRepository.add("task desc") inserted into task db table"', async t => 
 
   const taskDesc = 'lam bai tap di'
   await taskRepository.add(taskDesc)
-  const numberRow = (await db('task').count().first())['count(*)']
+  const {'count(*)': numberRow} = (await db('task').count().first())
+  const task = await db.select().from('task').where('id', '=', 1).first()
 
   t.equal(numberRow, 1)
+
+  t.equal(task.id, 1)
+  t.equal(task.description, taskDesc)
+  t.equal(task.is_completed, 0)
+  t.equal(+task.created_at, +task.updated_at)
 
   await db.destroy()
   t.end()
