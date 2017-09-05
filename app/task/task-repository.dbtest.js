@@ -17,7 +17,8 @@ const setup = () => {
 
 test('taskRepository.add("task desc") will return promise<task>"', async t => {
   const {db, taskRepository} = setup()
-  await db.migrate.rollback().then(() => db.migrate.latest())
+  await db.migrate.rollback()
+  await db.migrate.latest()
 
   const taskDesc = 'lam bai tap di'
   const task = await taskRepository.add(taskDesc)
@@ -33,7 +34,8 @@ test('taskRepository.add("task desc") will return promise<task>"', async t => {
 
 test('taskRepository.add("task desc") inserted into task db table"', async t => {
   const {db, taskRepository} = setup()
-  await db.migrate.rollback().then(() => db.migrate.latest())
+  await db.migrate.rollback()
+  await db.migrate.latest()
 
   const taskDesc = 'lam bai tap di'
   await taskRepository.add(taskDesc)

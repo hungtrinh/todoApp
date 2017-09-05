@@ -4,7 +4,23 @@
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
-
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Program",
+      "program": "${file}",
+      "runtimeExecutable": "node",
+      "env": {
+        "NODE_ENV":"test",
+        "PORT":"0",
+        "DB_UERNAME":"todo_test",
+        "DB_PASSWORD":"todo_test",
+        "DB_NAME":"todo_test",
+        "DB_HOST":"localhost",
+        "DB_PORT":"3306",
+        "DB_CONNECTION_LIMIT":"1"
+      }
+    },
     {
       "type": "node",
       "request": "launch",

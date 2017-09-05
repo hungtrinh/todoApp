@@ -1,17 +1,18 @@
 {
-  "name": "todoApp",
+  "name": "todoapp",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "migrate": "NODE_ENV=test PORT=0 DB_UERNAME=todo_test DB_PASSWORD=todo_test DB_NAME=todo_test DB_HOST=localhost DB_PORT=3306 knex migrate:latest",
-    "test": "NODE_ENV=test PORT=0 standard && tape app/**/*.unittest.js | tap-spec",
-    "test:db": "NODE_ENV=test PORT=0 DB_UERNAME=todo_test DB_PASSWORD=todo_test DB_NAME=todo_test DB_HOST=localhost DB_PORT=3306 DB_CONNECTION_LIMIT=1 tape test/*.js tape app/**/*.dbtest.js | tap-spec",
+    "migrate": "npm run env:test knex migrate:latest",
+    "test": "npm run env:test tape app/**/*.unittest.js | tap-spec",
+    "test:db": "npm run env:test tape test/*.js tape app/**/*.dbtest.js | tap-spec",
     "test:watch": "watch 'clear && npm run -s test' app -du",
     "test:cover": "NODE_ENV=test PORT=0 istanbul cover tape app/**/*.{unittest,dbtest}.js",
     "fix": "standard --fix app/**",
     "start": "NODE_ENV=development PORT=3000 pm2-dev index.js",
-    "pull": "git pull -r && npm i && npm run test"
+    "pull": "git pull -r && npm i && npm run test",
+    "env:test": "NODE_ENV=test PORT=0 DB_UERNAME=todo_test DB_PASSWORD=todo_test DB_NAME=todo_test DB_HOST=localhost DB_PORT=3306 DB_CONNECTION_LIMIT=1"
   },
   "keywords": [],
   "author": "",
