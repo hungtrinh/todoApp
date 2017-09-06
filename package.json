@@ -1,7 +1,7 @@
 {
   "name": "todoapp",
   "version": "1.0.0",
-  "description": "",
+  "description": "tdd without mocking, without external lib support mock & stub",
   "main": "index.js",
   "scripts": {
     "migrate": "npm run env:test knex migrate:latest",
@@ -12,21 +12,19 @@
     "fix": "standard --fix app/**",
     "start": "NODE_ENV=development PORT=3000 pm2-dev index.js",
     "pull": "git pull -r && npm i && npm run test",
-    "env:test": "NODE_ENV=test PORT=0 DB_UERNAME=todo_test DB_PASSWORD=todo_test DB_NAME=todo_test DB_HOST=localhost DB_PORT=3306 DB_CONNECTION_LIMIT=1"
+    "env:test": "NODE_ENV=test PORT=0 DB_UERNAME=todo_test DB_PASSWORD=todo_test DB_NAME=todo_test DB_HOST=localhost DB_PORT=3306 DB_CONNECTION_LIMIT=1 DEBUG=test"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["todo", "koa"],
+  "author": "hungtd",
   "license": "ISC",
   "devDependencies": {
     "dotenv": "^4.0.0",
     "istanbul": "0.4.5",
-    "leaked-handles": "5.2.0",
     "standard": "^10.0.2",
     "supertest": "^3.0.0",
     "tap-spec": "^4.1.1",
     "tape": "4.7.0",
     "tape-async": "2.3.0",
-    "testdouble": "^3.2.4",
     "watch": "^1.0.2"
   },
   "dependencies": {

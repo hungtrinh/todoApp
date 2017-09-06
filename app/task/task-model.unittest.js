@@ -31,7 +31,7 @@ test('create a task, task is immutable', t => {
   const task = taskModelFactory('an toi voi me')
   const today = Date.now()
 
-  t.throws(() => { task.description = 'do something' })
+  t.throws(() => task.description = 'do something' )
   t.throws(() => { task.createdAt = today })
   t.throws(() => { task.updatedAt = today })
   t.throws(() => { task.completed = true })

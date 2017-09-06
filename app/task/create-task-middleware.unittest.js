@@ -2,13 +2,21 @@
 
 const path = require('path')
 
-const test = require('tape')
+const test = require('tape-async')
 const request = require('supertest')
 const Koa = require('koa')
 const bodyParser = require('koa-bodyparser')
 
+const today = new Date()
 const stubTaskReposnitory = {
-  create: task => ({id: 1, description: task})
+  create: task => ({
+    id: 1,
+    description: task,
+    createdAt: today,
+    updatedAt: today,
+    completed: true,
+    done: _ => false
+  })
 }
 const serverOnline = stubTaskReposnitory => {
   const createTaskMiddlewareFactory = require(path.resolve(__dirname, './create-task-middleware-factory'))
@@ -19,26 +27,38 @@ const serverOnline = stubTaskReposnitory => {
   return app.listen().close()
 }
 
-test('POST /task with empty data then receive status code 400 with notice message', t => {
+test('POST /task with empty data then receive status code 400 with notice message', async t => {
   const expectedHttpCode = 400
   const expectedBodyMessage = 'description \'task\' required'
+  const resp = await request(serverOnline(stubTaskReposnitory)).post('/task')
 
-  request(serverOnline(stubTaskReposnitory))
-    .post('/task')
-    .expect(expectedHttpCode, expectedBodyMessage, t.end)
+  try {
+    t.equal(resp.type, 'text/plain')
+    t.equal(resp.status, expectedHttpCode)
+    t.equal(resp.text, expectedBodyMessage)
+  } catch (e) {}
+
+  t.end()
 })
 
 test('POST /task with task field then return status code 201', t => {
   const taskDesc = 'lam viec de'
-  const postData = {task: taskDesc}
-  const expectedCreatedCode = 201
-  const expectedTask = {
+  const expectedResponse = {
     id: 1,
-    description: taskDesc
+    description: taskDesc,
+    createdAt: today.toJSON(),
+    updatedAt: today.toJSON(),
+    completed: true
   }
   request(serverOnline(stubTaskReposnitory))
     .post('/task')
-    .send(postData)
-    .expect('Content-Type', /json/)
-    .expect(expectedCreatedCode, expectedTask, t.end)
+    .send({task: taskDesc})
+    .then(resp => {
+      t.equal(resp.type, 'application/json')
+      t.equal(resp.status, 201)
+      t.looseEquals(resp.body, expectedResponse)
+
+      t.end()
+    })
+    .catch(t.end)
 })

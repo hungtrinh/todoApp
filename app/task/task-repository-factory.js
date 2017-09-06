@@ -2,11 +2,7 @@
 
 const assert = require('assert')
 const path = require('path')
-
 const knex = require('knex')
-
-const knexConfigFilePath = path.resolve(__dirname, '../../knexfile')
-const knexConfigDefault = require(knexConfigFilePath)
 
 /**
  * Factory create a taskRepository
@@ -16,7 +12,7 @@ const knexConfigDefault = require(knexConfigFilePath)
  * @returns {object}
  */
 module.exports = ({
-  db = knex(knexConfigDefault),
+  db = knex(require(path.resolve(__dirname, '../../knexfile'))),
   taskModelFactory = require('./task-model-factory')
 } = {}) => {
   assert(db, 'opts.db is required')
