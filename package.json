@@ -14,26 +14,30 @@
     "pull": "git pull -r && npm i && npm run test",
     "env:test": "NODE_ENV=test PORT=0 DB_UERNAME=todo_test DB_PASSWORD=todo_test DB_NAME=todo_test DB_HOST=localhost DB_PORT=3306 DB_CONNECTION_LIMIT=1 DEBUG=test"
   },
-  "keywords": ["todo", "koa"],
+  "keywords": [
+    "todo",
+    "koa"
+  ],
   "author": "hungtd",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
-    "dotenv": "^4.0.0",
+    "dotenv": "4.0.0",
     "istanbul": "0.4.5",
-    "standard": "^10.0.2",
-    "supertest": "^3.0.0",
-    "tap-spec": "^4.1.1",
-    "tape": "4.7.0",
+    "standard": "10.0.3",
+    "supertest": "3.0.0",
+    "tap-spec": "4.1.1",
+    "tape": "4.8.0",
     "tape-async": "2.3.0",
-    "watch": "^1.0.2"
+    "watch": "1.0.2"
   },
   "dependencies": {
-    "joi": "^10.6.0",
-    "knex": "^0.13.0",
-    "koa": "^2.3.0",
-    "koa-bodyparser": "^4.2.0",
-    "koa-router": "^7.2.1",
-    "mysql": "^2.14.1",
-    "pm2": "^2.6.1"
-  }
+    "joi": "13.1.1",
+    "knex": "0.14.2",
+    "koa": "2.4.1",
+    "koa-bodyparser": "4.2.0",
+    "koa-router": "7.3.0",
+    "mysql": "2.15.0",
+    "pm2": "2.9.3"
+  },
+  "repository": "git@github.com:hungtrinh/todoApp.git"
 }

@@ -7,10 +7,13 @@
  * @returns {Function}
  */
 module.exports = (taskRepository) => async (ctx, next) => {
-  const taskDesc = ctx.request.body.task
-  ctx.assert(taskDesc, 400, '\'task\' is required')
+  const {id} = ctx.params
+  const {completed} = ctx.request.body
+  let task
+  ctx.assert(id, 400, 'task \'id\' is required')
+  ctx.assert(completed, 400, '\'completed\' is required')
 
-  const task = taskRepository.add(taskDesc)
+  // task = taskRepository.create(taskDesc)
   ctx.status = 201
   ctx.body = Object.assign({}, task, {
     createdAt: task.createdAt.toJSON(),

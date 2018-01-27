@@ -23,7 +23,7 @@ function taskModelFactory (task) {
     createdAt,
     updatedAt,
     completed
-  } = (typeof task === 'string') ? {description: task} : task
+  } = (typeof task === 'string') ? {description: task} : task || {}
 
   createdAt = createdAt || today
   updatedAt = updatedAt || today
