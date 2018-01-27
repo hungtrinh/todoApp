@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "migrate": "npm run env:test knex migrate:latest",
-    "test": "npm run env:test tape app/**/*.unittest.js | tap-spec",
+    "test": "tape app/**/*.unittest.js | tap-spec",
     "test:db": "npm run env:test tape test/*.js tape app/**/*.dbtest.js | tap-spec",
     "test:watch": "watch 'clear && npm run -s test' app -du",
     "test:cover": "NODE_ENV=test PORT=0 istanbul cover tape app/**/*.{unittest,dbtest}.js",
